@@ -1,0 +1,12 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <form action="/te_login" method="POST">
+      {%raw xsrf_form_html() %}
+      Username:<input type="text" name="username"/>
+      <input type="submit" value="Login In" />
+    </form>
+  </body>
+
+</html>
