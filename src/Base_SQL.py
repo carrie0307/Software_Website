@@ -60,9 +60,6 @@ def Reg_function(account, passwd, addr ,tel):
     return id
 
 
-
-
-
 # 根据id返回表中的detail字段 ,  如果不存在此id，返回0
 def Detail_functioni(id):
     sqlstr = "SELECT detail FROM  goods_table WHERE id = %s" %id
@@ -74,9 +71,55 @@ def Detail_functioni(id):
     return detail
 
 
+# 查询功能，根据商品类别查出所有商品，并返回   注：没有考虑查不到的情况
+def List_function(ttype):
+    goods_dict = {}
+    return_dict = {}
+    sqlstr = "SELECT id,name, price,discount FROM goods_table WHERE kind = '%s'" %ttype
+    count = cur.execute(sqlstr)
+    result = cur.fetchall()
+    for item in result:
+        if item[3]:
+            discount = int(item[2])
+        else:
+            discount = 1
+        goods_id = "%03d"%int(item[0])
+        goods_dict[goods_id] = [str(item[1]), int(item[2]), discount]
+    return_dict['length'] = int(count)
+    return_dict['data'] = goods_dict
+    print return_dict
+    return return_dict
+
+
+# 查询功能，根据商品名称查出所有商品，并返回    注：没有考虑查不到的情况
+def Search_function(item):
+    goods_dict = {}
+    return_dict = {}
+    sqlstr = "SELECT id,name, price,discount FROM goods_table WHERE name = '%s'" %item
+    count = cur.execute(sqlstr)
+    result = cur.fetchall()
+    for item in result:
+        if item[3]:
+            discount = int(item[2])
+        else:
+            discount = 1
+        goods_id = "%03d"%int(item[0])
+        goods_dict[goods_id] = [str(item[1]), int(item[2]), discount]
+    return_dict['length'] = int(count)
+    return_dict['data'] = goods_dict
+    print return_dict
+    return return_dict
+
+# 库存不足需要说明是哪个货物不足吗？？
+def Purchasefunction(dict):
+
+
+
+
 
 if __name__ == '__main__':
-    Main_list()
+    # Main_list()
     # Login_function('123', 'abc123')
     # Detail_functioni('001')
     # Reg_function('795', 'abc123', 'HIT' ,'18963166073')
+    Search_function('computer')
