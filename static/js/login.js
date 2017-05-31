@@ -1,4 +1,4 @@
-function login() {
+ï»¿function login() {
     var password = $('#login_form #password').val();
     password = hex_md5(password)
     var dict = {
@@ -7,7 +7,7 @@ function login() {
     }
     $.post('/login', dict, function (data, ststus) {
         if (data == '0') {
-            alert('ÓÃ»§Ãû»òÃÜÂë´íÎó');
+            alert('ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯');
         }
         else {
             location.href = '#'
@@ -18,24 +18,26 @@ function login() {
 function reg() {
     var password = $('#reg_form #password').val();
     if (password != $('#reg_form #c_password').val()) {
-        alert('ÖØ¸´ÃÜÂë´íÎó£¡')
+        alert('é‡å¤å¯†ç é”™è¯¯ï¼')
         return false
     }
     password = hex_md5(password)
-    alert(password)
     var dict = {
         'account': $('#reg_form #account').val(),
         'password': password,
         'addr': $('#reg_form #addr').val(),
         'tel': $('#reg_form #phone').val()
     }
-	alert(dict['account'])
     $.post('/reg', dict, function (data, ststus) {
         if (data == '0') {
-            alert('ÓÃ»§ÃûÖØ¸´');
+            alert('ç”¨æˆ·åé‡å¤');
         }
         else {
-            location.href = '#'
+            alert('æ³¨å†ŒæˆåŠŸ')
+            $.cookie('account', dict['account']);
+            $.cookie('cartlen', 0);
+
+            location.href = '/'
         }
     });
     return false

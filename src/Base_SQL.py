@@ -36,8 +36,6 @@ def Login_function(acc, passwd):
     return id
 
 
-
-
 def Reg_function(account, passwd, addr ,tel):
     # a="%5d"%x
     accounts = []
@@ -57,6 +55,7 @@ def Reg_function(account, passwd, addr ,tel):
         result = cur.fetchall()
         id = int(result[0][0])
         id = "%03d"%id
+    print id
     return id
 
 
@@ -77,18 +76,23 @@ def List_function(ttype):
     return_dict = {}
     sqlstr = "SELECT id,name, price,discount FROM goods_table WHERE kind = '%s'" %ttype
     count = cur.execute(sqlstr)
-    result = cur.fetchall()
-    for item in result:
-        if item[3]:
-            discount = int(item[2])
-        else:
-            discount = 1
-        goods_id = "%03d"%int(item[0])
-        goods_dict[goods_id] = [str(item[1]), int(item[2]), discount]
-    return_dict['length'] = int(count)
-    return_dict['data'] = goods_dict
-    print return_dict
-    return return_dict
+    if count == 0:
+        return_dict['length'] = int(count)
+        return_dict['data'] = goods_dict
+        return return_dict
+    else:
+        result = cur.fetchall()
+        for item in result:
+            if item[3]:
+                discount = int(item[2])
+            else:
+                discount = 1
+            goods_id = "%03d"%int(item[0])
+            goods_dict[goods_id] = [str(item[1]), int(item[2]), discount]
+        return_dict['length'] = int(count)
+        return_dict['data'] = goods_dict
+        print return_dict
+        return return_dict
 
 
 # 查询功能，根据商品名称查出所有商品，并返回    注：没有考虑查不到的情况 length = 0
@@ -97,18 +101,23 @@ def Search_function(item):
     return_dict = {}
     sqlstr = "SELECT id,name, price,discount FROM goods_table WHERE name = '%s'" %item
     count = cur.execute(sqlstr)
-    result = cur.fetchall()
-    for item in result:
-        if item[3]:
-            discount = int(item[2])
-        else:
-            discount = 1
-        goods_id = "%03d"%int(item[0])
-        goods_dict[goods_id] = [str(item[1]), int(item[2]), discount]
-    return_dict['length'] = int(count)
-    return_dict['data'] = goods_dict
-    print return_dict
-    return return_dict
+    if count == 0:
+        return_dict['length'] = int(count)
+        return_dict['data'] = goods_dict
+        return return_dict
+    else:
+        result = cur.fetchall()
+        for item in result:
+            if item[3]:
+                discount = int(item[2])
+            else:
+                discount = 1
+            goods_id = "%03d"%int(item[0])
+            goods_dict[goods_id] = [str(item[1]), int(item[2]), discount]
+        return_dict['length'] = int(count)
+        return_dict['data'] = goods_dict
+        print return_dict
+        return return_dict
 
 # 库存不足需要说明是哪个货物不足吗？？
 # def Purchasefunction(dict):

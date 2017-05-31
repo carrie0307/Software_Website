@@ -72,6 +72,7 @@ class RegHandler(tornado.web.RequestHandler):
         password = self.get_argument('password')
         addr = self.get_argument('addr')
         tel = self.get_argument('tel')
+        Reg_function(account, passwd, addr ,tel)
     def get(self):
         self.render('login.html')
 
