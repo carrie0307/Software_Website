@@ -55,7 +55,7 @@ CREATE TABLE `order_table` (
   `id` int(4) NOT NULL DEFAULT '0',
   `user_id` varchar(20) NOT NULL,
   `goods_idandnum` varchar(50) NOT NULL,
-  `time` int(11) NOT NULL,
+  `time` varchar(15) DEFAULT NULL,
   `pay` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -67,7 +67,7 @@ CREATE TABLE `order_table` (
 
 LOCK TABLES `order_table` WRITE;
 /*!40000 ALTER TABLE `order_table` DISABLE KEYS */;
-INSERT INTO `order_table` VALUES (1,'001','computer1',20,0);
+INSERT INTO `order_table` VALUES (1,'001','computer1','20',0);
 /*!40000 ALTER TABLE `order_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +85,7 @@ CREATE TABLE `user_table` (
   `addr` text,
   `tel` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +94,7 @@ CREATE TABLE `user_table` (
 
 LOCK TABLES `user_table` WRITE;
 /*!40000 ALTER TABLE `user_table` DISABLE KEYS */;
-INSERT INTO `user_table` VALUES (1,'123','abc123',NULL,NULL),(2,'124','def456',NULL,NULL),(3,'125','abc123','HIT','18963166073'),(4,'127','abc123','HIT','18963166073'),(5,'129','abc123','HIT','18963166073'),(6,'130','abc123','HIT','18963166073'),(7,'132','abc123','HIT','18963166073'),(8,'135','abc123','HIT','18963166073'),(9,'185','abc123','HIT','18963166073'),(10,'165','abc123','HIT','18963166073'),(11,'795','abc123','HIT','18963166073');
+INSERT INTO `user_table` VALUES (1,'123','abc123',NULL,NULL),(2,'124','def456',NULL,NULL),(3,'125','abc123','HIT','18963166073'),(4,'127','abc123','HIT','18963166073'),(5,'129','abc123','HIT','18963166073'),(6,'130','abc123','HIT','18963166073'),(7,'132','abc123','HIT','18963166073'),(8,'135','abc123','HIT','18963166073'),(9,'185','abc123','HIT','18963166073'),(10,'165','abc123','HIT','18963166073'),(11,'795','abc123','HIT','18963166073'),(12,'9999','c81e728d9d4c2f636f067f89cc14862c','fff','sdf');
 /*!40000 ALTER TABLE `user_table` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -107,4 +107,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-30 23:59:44
+-- Dump completed on 2017-05-31  6:24:34
