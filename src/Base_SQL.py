@@ -71,7 +71,7 @@ def Detail_functioni(id):
     return detail
 
 
-# 查询功能，根据商品类别查出所有商品，并返回   注：没有考虑查不到的情况
+# 查询功能，根据商品类别查出所有商品，并返回   注：没有考虑查不到的情况, length = 0
 def List_function(ttype):
     goods_dict = {}
     return_dict = {}
@@ -91,7 +91,7 @@ def List_function(ttype):
     return return_dict
 
 
-# 查询功能，根据商品名称查出所有商品，并返回    注：没有考虑查不到的情况
+# 查询功能，根据商品名称查出所有商品，并返回    注：没有考虑查不到的情况 length = 0
 def Search_function(item):
     goods_dict = {}
     return_dict = {}
@@ -111,7 +111,7 @@ def Search_function(item):
     return return_dict
 
 # 库存不足需要说明是哪个货物不足吗？？
-def Purchasefunction(dict):
+# def Purchasefunction(dict):
 
 
 

@@ -22,6 +22,7 @@ function reg() {
         return false
     }
     password = hex_md5(password)
+    alert(password)
     var dict = {
         'account': $('#reg_form #account').val(),
         'password': password,

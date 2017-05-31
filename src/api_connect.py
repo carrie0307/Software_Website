@@ -48,7 +48,7 @@ class DetailHandler(tornado.web.RequestHandler):
     def get(self):
         good_id = self.get_argument('id')
         detail = Base_SQL.Detail_functioni(good_id)
-        self.write(detail)
+        self.render("detail.html",detail=detail)
 
 
 # 登录成功返回1,同时写cookie，登录失败返回0
