@@ -152,6 +152,9 @@ def Reg_function(account, passwd, addr ,tel):
             return return_dict
 
 
+def Purchase_function(data):
+    data = [{'001':3},{'002':5}]
+
 
 def Order_function(user_id):
    # 从cookie获取user_idf
@@ -223,6 +226,7 @@ def  Admin_Modify_Price_function(good_id, price):
     except:
         print 'result : 2'
         return 0
+
 
 # 修改商品折扣
 def Admin_Modify_Discount_function(good_id, re_discount):
