@@ -1,0 +1,24 @@
+1.查看订单
+	GET
+	返回：dictionary{“订单id”：{“user_id”:user_id, "goods_name":goods_name, "goods_num":goods_num, "sum":sum, "deal_time":deal_time, "pay":pay}， 。。。}
+
+2.查看用户
+	GET
+	返回:dictionary{"用户id”：[account, password, addr, tel], ...}
+
+3.修改商品价格
+	POST  参数：good_id, 修改后价格price)
+	返回：  int 1 修改成功，int 0 修改失败
+
+4.修改商品折扣
+	POST  参数：good_id, 修改后价格折扣re_discount)
+	返回：  int 1 修改成功，int 0 修改失败
+
+5.删除订单：
+	POST order_id
+	返回：  int 1 删除成功，int 0 删除失败
+
+6.删除用户：
+	POST： user_id
+	返回：  int 1 删除成功，int 0 删除失败
+

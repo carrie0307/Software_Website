@@ -82,11 +82,41 @@ class RegHandler(tornado.web.RequestHandler):
     def get(self):
         self.render('login.html')
 
+# 购物车怎么写
+class CartHandler(tornado.web.RequestHandler):
+    def get(self):
+         pass
+         # 购物车怎么写
+
+
+class PurchaseHandler(tornado.web.RequestHandler):
+    def get(self):
+         pass
+         # 下订单;statue的状态是针对具体某个商品还是全部？
+
+
+class PurchaseCtrlHandler(tornado.web.RequestHandler):
+    def get(self):
+         pass
+         # 拿到了userid，如何确定是哪一个订单？
+
 
 class OrderHandler(tornado.web.RequestHandler):
     def get(self):
          user_id = self.set_secure_cookie('user_id')
          order_dict_return = Base_SQL.Order_function(user_id)
+         self.write(order_dict_return)
+
+
+# 管理员查看所有订单
+class Admin_Orders_Handler(tornado.web.RequestHandler):
+    def get(self):
+         Base_SQL.Admin_Order_function()
+
+
+class Admin_Allusers_Handler(tornado.web.RequestHandler):
+    def get(self):
+         Base_SQL.Admin_Order_function()
 
 
 

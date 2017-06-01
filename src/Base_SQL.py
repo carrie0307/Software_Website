@@ -112,7 +112,7 @@ def Reg_function(account, passwd, addr ,tel):
     for item in result:
         accounts.append(str(item[0]))
     if account in accounts:
-        id = '0'
+        id = 0
     else:
         sqlstr = "INSERT INTO user_table(account, password, addr, tel) VALUES('%s','%s','%s','%s') " %(account, passwd, addr,tel)
         cur.execute(sqlstr)
@@ -175,6 +175,49 @@ def Order_function(user_id):
         print return_dict
 
 
+def Admin_Order_function():
+    order_dict = {}
+    data_dict = {}
+    return_dict = {}
+    sqlstr = "SELECT id, user_id, goods_name, goods_num, sum, deal_time, pay FROM order_table"
+    count = cur.execute(sqlstr)
+    result = cur.fetchall()
+    for item in result:
+        order_dict['user_id'] = str(item[1])
+        order_dict['goods_name'] = str(item[2])
+        order_dict['goods_num'] = int(item[3])
+        order_dict['sum']= int(item[4])
+        order_dict['deal_time'] = str(item[5])
+        order_dict['pay'] = int(item[6])
+        order_id = "%03d"%int(item[0])
+        data_dict[order_id] = order_dict
+        order_dict = {}
+    return_dict['length'] = int(count)
+    return_dict['data'] = data_dict
+    print return_dict
+    return return_dict
+
+
+def Admin_Allusers_function():
+    return_dict = {}
+    data_dict = {}
+    sqlstr = "SELECT id, account, password, addr, tel FROM user_table  ORDER BY id"
+    count = cur.execute(sqlstr)
+    result = cur.fetchall()
+    for item in result:
+        user_id = "%03d"%int(item[0])
+        data_dict[user_id] = [str(item[1]), str(item[2]), str(item[3]), str(item[4])]
+    return_dict['length'] = int(count)
+    return_dict['data'] = data_dict
+   print return_dict
+    return return_dict
+
+
+
+
+
+
+
 # 确认购买时候，还需要确定是为哪一条记录确认购买，参数只有uid不够
 # 库存不足需要说明是哪个货物不足吗？？
 # def Purchasefunction(dict):
@@ -185,8 +228,10 @@ def Order_function(user_id):
 
 if __name__ == '__main__':
     # Main_list()
-    Login_function('123', 'abc123')
+   #  Login_function('123', 'abc123')
     # Detail_functioni('001')
     # Reg_function('795', 'abc123', 'HIT' ,'18963166073')
    #  Search_function('computer')
   #  Order_function('002')
+  # Admin_Order_function()
+  Admin_Allusers_function()
