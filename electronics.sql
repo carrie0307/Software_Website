@@ -52,13 +52,16 @@ DROP TABLE IF EXISTS `order_table`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order_table` (
-  `id` int(4) NOT NULL DEFAULT '0',
+  `id` int(4) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(20) NOT NULL,
-  `goods_idandnum` varchar(50) NOT NULL,
-  `time` varchar(15) DEFAULT NULL,
+  `good_id` int(4) DEFAULT NULL,
+  `goods_name` varchar(20) DEFAULT NULL,
+  `goods_num` int(4) DEFAULT NULL,
+  `sum` int(6) DEFAULT NULL,
+  `deal_time` varchar(20) DEFAULT NULL,
   `pay` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +70,7 @@ CREATE TABLE `order_table` (
 
 LOCK TABLES `order_table` WRITE;
 /*!40000 ALTER TABLE `order_table` DISABLE KEYS */;
-INSERT INTO `order_table` VALUES (1,'001','computer1','20',0);
+INSERT INTO `order_table` VALUES (1,'002',2,'mouse',3,60,'2017-05-31-18:39',0),(2,'002',2,'mouse',3,60,'2017-05-31-21:00',0),(3,'002',1,'computer',3,7000,'2017-05-31-21:00',0);
 /*!40000 ALTER TABLE `order_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +88,7 @@ CREATE TABLE `user_table` (
   `addr` text,
   `tel` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +97,7 @@ CREATE TABLE `user_table` (
 
 LOCK TABLES `user_table` WRITE;
 /*!40000 ALTER TABLE `user_table` DISABLE KEYS */;
-INSERT INTO `user_table` VALUES (1,'123','abc123',NULL,NULL),(2,'124','def456',NULL,NULL),(3,'125','abc123','HIT','18963166073'),(4,'127','abc123','HIT','18963166073'),(5,'129','abc123','HIT','18963166073'),(6,'130','abc123','HIT','18963166073'),(7,'132','abc123','HIT','18963166073'),(8,'135','abc123','HIT','18963166073'),(9,'185','abc123','HIT','18963166073'),(10,'165','abc123','HIT','18963166073'),(11,'795','abc123','HIT','18963166073'),(12,'9999','c81e728d9d4c2f636f067f89cc14862c','fff','sdf');
+INSERT INTO `user_table` VALUES (1,'123','abc123',NULL,NULL),(2,'124','def456',NULL,NULL),(3,'125','abc123','HIT','18963166073'),(4,'127','abc123','HIT','18963166073'),(5,'129','abc123','HIT','18963166073'),(6,'130','abc123','HIT','18963166073'),(7,'132','abc123','HIT','18963166073'),(8,'135','abc123','HIT','18963166073'),(9,'185','abc123','HIT','18963166073'),(10,'165','abc123','HIT','18963166073'),(11,'795','abc123','HIT','18963166073'),(12,'9999','c81e728d9d4c2f636f067f89cc14862c','fff','sdf'),(13,'333','c81e728d9d4c2f636f067f89cc14862c','ff','1234');
 /*!40000 ALTER TABLE `user_table` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -107,4 +110,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-31  6:24:34
+-- Dump completed on 2017-06-01  9:47:16

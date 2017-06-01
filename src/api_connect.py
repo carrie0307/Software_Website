@@ -27,11 +27,12 @@ class MainHandler(tornado.web.RequestHandler):
         # goods_dict_return = Base_SQL.Main_list()
         # self.write(goods_dict_return)
 
+
 # 根据商品类别查询所有同名的商品
 class ListHandler(tornado.web.RequestHandler):
     def get(self):
         ttype = self.get_argument('type')
-        goods_dict_return = Base_SQL.Search_function(ttype)
+        goods_dict_return = Base_SQL.List_function(ttype)
         self.write(goods_dict_return)
 
 
@@ -56,11 +57,11 @@ class LoginHandler(tornado.web.RequestHandler):
     def post(self):
         account = self.get_argument('account')
         password = self.get_argument('password')
-        id = Base_SQL.Login_function(account, password)
-        if id == '0':
+        user_id = Base_SQL.Login_function(account, password)
+        if id == '000':
             self.write('0')
         else:
-            self.set_secure_cookie('user_id', id)
+            self.set_secure_cookie('user_id', user_id)
             self.write('1')
     def get(self):
         self.render('login.html')
@@ -72,9 +73,23 @@ class RegHandler(tornado.web.RequestHandler):
         password = self.get_argument('password')
         addr = self.get_argument('addr')
         tel = self.get_argument('tel')
-        Base_SQL.Reg_function(account, password, addr ,tel)
+        user_id = Base_SQL.Reg_function(account, password, addr, tel)
+        if user_id == '000':
+            self.write('0')
+        else:
+            self.set_secure_cookie('user_id', user_id)
+            self.write('1')
     def get(self):
         self.render('login.html')
+
+
+class OrderHandler(tornado.web.RequestHandler):
+    def get(self):
+         user_id = self.set_secure_cookie('user_id')
+         order_dict_return = Base_SQL.Order_function(user_id)
+
+
+
 
 
 if __name__ == "__main__":
