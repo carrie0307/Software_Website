@@ -114,9 +114,42 @@ class Admin_Orders_Handler(tornado.web.RequestHandler):
          Base_SQL.Admin_Order_function()
 
 
+# 管理员查看所有用户
 class Admin_Allusers_Handler(tornado.web.RequestHandler):
     def get(self):
-         Base_SQL.Admin_Order_function()
+         Base_SQL.Admin_Allusers_function()
+
+
+# 修改商品价格;result为1,修改成功;为0,则修改失败,result为int
+class Admin_Modify_Price_Handler(tornado.web.RequestHandler):
+    def post(self):
+        good_id = self.get_argument('good_id')
+        price = self.get_argument('price')
+        result = Base_SQL.Admin_Modify_Price_function(good_id, price)
+
+
+# 修改商品折扣;result为1,修改成功;为0,则修改失败,result为int
+class Admin_Modify_Discount_Handler(tornado.web.RequestHandler):
+    def post(self):
+        good_id = self.get_argument('good_id')
+        re_discount = self.get_argument('re_discount')
+        result = Base_SQL.Admin_Modify_Discount_function(good_id, re_discount)
+
+
+# 删除订单;result为1,修改成功;为0,则修改失败,result为int
+class Admin_Del_Order_Handler(tornado.web.RequestHandler):
+    def post(self):
+        order_id = self.get_argument('order_id')
+        Base_SQL.Admin_Del_Order_function(order_id)
+
+
+class Admin_Del_User_Handler(tornado.web.RequestHandler):
+    def post(self):
+        user_id = self.get_argument('user_id')
+        Base_SQL.Admin_Del_User_function(user_id)
+
+
+
 
 
 

@@ -209,9 +209,58 @@ def Admin_Allusers_function():
         data_dict[user_id] = [str(item[1]), str(item[2]), str(item[3]), str(item[4])]
     return_dict['length'] = int(count)
     return_dict['data'] = data_dict
-   print return_dict
+    print return_dict
     return return_dict
 
+# 修改商品价格
+def  Admin_Modify_Price_function(good_id, price):
+    try:
+        sqlstr = "UPDATE goods_table SET price = %s" %price
+        cur.execute(sqlstr)
+        conn.commit()
+        print 'result : 1'
+        return 1
+    except:
+        print 'result : 2'
+        return 0
+
+# 修改商品折扣
+def Admin_Modify_Discount_function(good_id, re_discount):
+    try:
+        sqlstr = "UPDATE goods_table SET discount = %s" %re_discount
+        cur.execute(sqlstr)
+        conn.commit()
+        print 'result : 1'
+        return 1
+    except:
+        print 'result : 2'
+        return 0
+
+
+# 删除订单
+def Admin_Del_Order_function(order_id):
+    try:
+        sqlstr = " DELETE FROM order_table WHERE id  = %s" %int(order_id)
+        cur.execute(sqlstr)
+        conn.commit()
+        print 'result : 1'
+        return 1
+    except:
+        print 'result : 2'
+        return 0
+
+
+# 删除用户
+def Admin_Del_User_function(user_id):
+    try:
+        sqlstr = " DELETE FROM user_table WHERE id  = %s" %int(user_id)
+        cur.execute(sqlstr)
+        conn.commit()
+        print 'result : 1'
+        return 1
+    except:
+        print 'result : 2'
+        return 0
 
 
 
@@ -234,4 +283,8 @@ if __name__ == '__main__':
    #  Search_function('computer')
   #  Order_function('002')
   # Admin_Order_function()
-  Admin_Allusers_function()
+ #  Admin_Allusers_function()
+ # Admin_Modify_Price_function(1, 50)
+ # Admin_Modify_Discount_function(2, 9)
+ # Admin_Del_Order_function('003')
+ Admin_Del_User_function('013')

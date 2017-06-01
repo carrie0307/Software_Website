@@ -11,7 +11,7 @@
 	返回：  int 1 修改成功，int 0 修改失败
 
 4.修改商品折扣
-	POST  参数：good_id, 修改后价格折扣re_discount
+	POST  参数：good_id, 修改后价格折扣re_discount)
 	返回：  int 1 修改成功，int 0 修改失败
 
 5.删除订单：
