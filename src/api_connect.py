@@ -109,8 +109,11 @@ class HomeHandler(tornado.web.RequestHandler):
 
 class PurchaseHandler(tornado.web.RequestHandler):
     def post(self):
-         pass
-         # 下订单;statue的状态是针对具体某个商品还是全部？
+         good_id = self.get_argument('good_id')
+         good_num = self.get_argument('num')
+         user_id = get_secure_cookie('user_id')
+         Base_SQL.Purchase_function(good_id, num, user_id)
+
 
 
 # 确认支付,根据uuid即order_id
