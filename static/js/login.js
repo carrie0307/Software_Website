@@ -12,7 +12,7 @@
         else {
             $.cookie('account', dict['account']);
             $.cookie('cartlen', 0);
-            window.location.go(-1);
+            location.href='/';
         }
     });
     return false
@@ -38,8 +38,7 @@ function reg() {
             alert('注册成功')
             $.cookie('account', dict['account']);
             $.cookie('cartlen', 0);
-
-            window.location.go(-1);
+            location.href='/';
         }
     });
     return false
