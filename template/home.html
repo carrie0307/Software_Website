@@ -8,6 +8,7 @@
     <link href="static/css/font-awesome.min.css" rel="stylesheet">
     <link href="static/css/style.css" rel="stylesheet">
     <link href="static/css/style2.css" rel="stylesheet">
+    <link href="static/css/home.css" rel="stylesheet">
     <link href="static/css/responsive.css" rel="stylesheet">
     <!--link href="css/blog-single.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet"-->
@@ -38,110 +39,61 @@
             </div>
         </div>
 
-        <!-- logo and adds -->
-        <div class="logo-add">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="logo"><i class="fa fa-diamond"></i>E - Market</div>
-                    </div>
-                    <div class="col-sm-8">
-                        <h3 class="add bb-year-end-ribbon hidden-xs">
-                            <img src="images/red-tablet.png" width="40px" alt="" />
-                            <span>Hi! We Can <span>Help</span> Your Business</span> <button class="btn btn-default"> Get Stared </button>
-                        </h3>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
         <!-- header bottom -->
-        <div class="header-bottom">
-            <div class="row">
-                <div class="col-sm-12">
-                    <nav class="navbar navbar-default">
-                        <div class="container">
-                            <!-- Brand and toggle get grouped for better mobile display -->
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-bottom" aria-expanded="false">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                            </div>
-
-                            <!-- Collect the nav links, forms, and other content for toggling -->
-                            <div class="collapse navbar-collapse" id="header-bottom">
-                                <ul class="nav navbar-nav">
-                                    <li><a href="/list?type=笔记本电脑">笔记本电脑</a></li>
-                                    <li><a href="/list?type=手机">手机</a></li>
-                                    <li><a href="/list?type=数码相机">数码相机</a></li>
-                                    <li><a href="/list?type=耳机">耳机</a></li>
-                                    <li><a href="/list?type=键盘">键盘</a></li>
-                                    <li><a href="/list?type=鼠标">鼠标</a> </li>
-                                    <li><a href="/list?type=显卡">显卡</a></li>
-                                </ul>
-                                <form class="navbar-form navbar-right" role="search" method="get">
-                                    <div class="form-group">
-                                        <input type="text" name="word" class="form-control" placeholder="Search...">
-                                        <span class="nav-search"><a href="search"><i class="fa fa-search"></i></a></span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
+        
     </header>
 
-    <!-- home -->
-    <section class="home">
-        <div class="intro">
-            <div id="product-slide" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#product-slide" data-slide-to="0" class="active"></li>
-                    <li data-target="#product-slide" data-slide-to="1"></li>
-                    <li data-target="#product-slide" data-slide-to="2"></li>
-                    <li data-target="#product-slide" data-slide-to="3"></li>
-                    <li data-target="#product-slide" data-slide-to="4"></li>
-                    <li data-target="#product-slide" data-slide-to="5"></li>
-                </ol>
-                <div class="carousel-inner" role="listbox">
-
-
-                </div>
-                <!-- Controls -->
-                <a class="left carousel-control" href="#product-slide" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-                <a class="right carousel-control" href="#product-slide" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- emarket adds -->
-    <section class="emarket-adds">
+    <section class="">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="single-add">
-                        <h4>Get <span>50%</span> Discount</h4>
-                        <a href="#" class="btn btn-default" role="button">Learn More</a>
-                        <span class="img-add"><img src="images/red-tablet.png" alt="" /></span>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="zp_nrm_r">
+                        <h1>用户信息</h1>
+                        <p><em>用户名:</em><i>{{account}}</i></p>
+                        <p><em>住址:</em><i>{{addr}}</i></p>
+                        <p><em>电话:</em><i>{{tel}}</i></p>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="single-add">
-                        <h4>Best <span>Offer</span> for You</h4>
-                        <a href="#" class="btn btn-default" role="button">Learn More</a>
-                        <span class="img-add"><img src="images/red-tablet.png" alt="" /></span>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="single-add">
-                        <h4><span>Only</span> Best smartphone</h4>
-                        <a href="#" class="btn btn-default" role="button">Learn More</a>
-                        <span class="img-add"><img src="images/red-tablet.png" alt="" /></span>
+                <div class="row">
+                    <div class="public_m5">
+                        <h1>订单信息</h1>
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr style=" border-bottom:1px solid #000">
+                                    <th class="olist1">订单号</th>
+                                    <th class="olist2">商品名</th>
+                                    <th class="olist3">购买数量</th>
+                                    <th class="olist4">订单总额</th>
+                                    <th class="olist5">下单时间</th>
+                                    <th class="olist4">交易状态</th>
+                                    <th class="olist5">操作</th>
+                                </tr>
+                                {%if length != 0%}
+                                {%for i in data%}
+                                <tr>
+                                    <td>{{i['oid']}}</td>
+                                    <td>{{i['name']}}</td>
+                                    <td>{{i['num']}}</td>
+                                    <td>￥{{i['sum']}}</td>
+                                    <td>{{i['time']}}</td>
+                                    {%if i['statue'] == 0%}
+                                    <td><font class="jdqbsys_m">待付款</font></td>
+                                    <td><a href="/orderctrl?type=pay&oid={{i['oid']}}">付款</a><a href="/orderctrl?type=del&oid={{i['oid']}}">取消订单</a></td>
+                                    {%else%}
+                                    <td><font class="jds_m">已完成</font></td>
+                                    <td><a href="/orderctrl?type=del&oid={{i['oid']}}">删除</a>
+                                    {%end%}
+                                </tr>
+                                {%end%}
+                                {%end%}
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

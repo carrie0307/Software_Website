@@ -1,0 +1,13 @@
+1.Search需要改Handler吗？
+
+2.CartHandler怎么验证是否登录？   加入购物车的物品需要存数据库吗？目前没有购物车的表
+
+3.HomeHandler 从cookie获取urid？
+
+4.DetailHandler(tornado.web.RequestHandler) 查询为空没有添加处理
+
+5.这个id在相应情况下是用户号和订单号
+
+6.admin的#验证身份，#判断请求类型  怎么写？
+
+

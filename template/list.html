@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html" ; charset="utf-8" />
     <title>坑死你购物网</title>
     <!-- ALL STYLESHEET -->
     <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,22 +22,23 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-3">
-                        
+
                     </div>
                     <div class="col-sm-4">
                     </div>
                     <div class="col-sm-5">
                         <ul class="list-inline pull-right">
-                            <li><a href="/home" id="user"><i class="fa fa-user"></i> My Account</a></li>
-                            <li><a href="/cart" id="cart"><i class="fa fa-heart-o"></i> Wishlist (0)</a></li>
-                            <li><a class="/register" href="login">Register</a></li>
-                            <li><a class="/register" href="login">Login</a></li>
+                            <li><a href="home" id="user"><i class="fa fa-user"></i> My Account</a></li>
+                            <li><a href="cart" id="cart"><i class="fa fa-heart-o"></i> Wishlist (0)</a></li>
+                            <li><a class="register" href="login">Register</a></li>
+                            <li><a class="register" href="login">Login</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
 
+        
         <!-- logo and adds -->
         <div class="logo-add">
             <div class="container">
@@ -47,7 +48,7 @@
                     </div>
                     <div class="col-sm-8">
                         <h3 class="add bb-year-end-ribbon hidden-xs">
-                            <img src="images/red-tablet.png" width="40px" alt="" />
+                            <img src="images/red-tablet.png" width="40px;" alt="" />
                             <span>Hi! We Can <span>Help</span> Your Business</span> <button class="btn btn-default"> Get Stared </button>
                         </h3>
                     </div>
@@ -96,58 +97,208 @@
         </div>
     </header>
 
-    <!-- home -->
-    <section class="home">
-        <div class="intro">
-            <div id="product-slide" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#product-slide" data-slide-to="0" class="active"></li>
-                    <li data-target="#product-slide" data-slide-to="1"></li>
-                    <li data-target="#product-slide" data-slide-to="2"></li>
-                    <li data-target="#product-slide" data-slide-to="3"></li>
-                    <li data-target="#product-slide" data-slide-to="4"></li>
-                    <li data-target="#product-slide" data-slide-to="5"></li>
-                </ol>
-                <div class="carousel-inner" role="listbox">
-
-
+    <!-- desktop bar -->
+    <section class="desktop-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3>Products <i class="fa fa-bars"></i></h3>
                 </div>
-                <!-- Controls -->
-                <a class="left carousel-control" href="#product-slide" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-                <a class="right carousel-control" href="#product-slide" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
+                <div class="col-sm-8">
+                    <ol class="breadcrumb hidden-xs pull-right">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li class="active"><a href="#">Products</a></li>
+                    </ol>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- emarket adds -->
-    <section class="emarket-adds">
+    <!-- recommented products -->
+    <section class="featured-product recommented-product">
         <div class="container">
             <div class="row">
-                <div class="col-sm-4">
-                    <div class="single-add">
-                        <h4>Get <span>50%</span> Discount</h4>
-                        <a href="#" class="btn btn-default" role="button">Learn More</a>
-                        <span class="img-add"><img src="images/red-tablet.png" alt="" /></span>
+                <div class="col-sm-3">
+                    <div class="sidebar">
+
+
+
+                        <div class="list-group">
+                            <a href="/list?type=笔记本电脑" class="list-group-item">笔记本电脑</a>
+                            <a href="/list?type=手机" class="list-group-item">手机</a>
+                            <a href="/list?type=数码相机" class="list-group-item">数码相机</a>
+                            <a href="/list?type=耳机" class="list-group-item">耳机</a>
+                            <a href="/list?type=键盘" class="list-group-item">键盘</a>
+                            <a href="/list?type=鼠标" class="list-group-item">鼠标</a> 
+                            <a href="/list?type=显卡" class="list-group-item">显卡</a>
+                        </div>
+
+
+
+
+                        
+                        
+
+                        
+
+                        
+                        
+                    </div> <!-- sidebar -->
+                </div>
+
+
+
+
+                <div class="col-sm-9">
+
+
+
+                    <!-- desktop -->
+                    <div class="featured-product desktop">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-12">
+
+                                        <div class="heading-border b-color-6"></div>
+                                    </div>
+                                </div> <!-- section title -->
+                                <div class="row hidden-xs">
+                                    <div class="col-sm-12">
+
+                                    </div>
+                                </div>
+                                {%set a = 0%}
+                                {% if length == 0 %}
+                                    meiyou
+                                {% else %}
+                                {% for id in data %}
+                                {%if a == 2%}
+                                <div class="row">
+                                {%end%}
+                                    <div class="col-sm-4">
+                                        <div class="thumbnail">
+                                            <span class="service-link text-center">
+                                                <img class="img-responsive" src="static/images/goods/{{id}}.jpg" alt="" />
+                                                <div class="list-inline">
+                                                    <a href="/detail?id={{id}}"><i class="fa fa-eye"></i></a>
+                                                </div>
+                                            </span>
+                                            <h class="caption">
+                                                <h3 id ="name">{{data[id][0]}}</h3>
+                                                <strong price="{{data[id][1] * (100-data[id][2])/100}}">￥{{data[id][1] * (100-data[id][2])/100}}</strong>
+                                                {% if data[id][2] != 0 %}<del>￥{{data[id][1]}}</del>{% end %}
+                                                <div><a onclick="add('{{id}}');alert('已添加进购物车')" class="btn btn-default" role="button">Add to Cart</a><span class="pull-right"><i class="fa fa-heart-o"></i> Add to Wishlist</span></div>
+                                        </div>
+                                    </div>
+                                {%if a == 2 %}
+                                {% set a=0 %}
+                                </div>
+                                {%else%}
+                                {%set a = a+1 %}
+                                {%end%}
+
+                                {% end %}
+                                {% end %}
+
+
+                            
+                        </div>
+                    </div>
+                </div> <!-- desktop -->
+                <!-- pagination -->
+                <!--
+                <nav>
+                    <ul class="pagination">
+                        <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                        <li><a href="#">1</a></li>
+                        <li class="active"><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+                        </li>
+                    </ul>
+                </nav>-->
+            </div><!--div 9 -->
+        </div>
+        </div>
+    </section>
+
+    <!-- sponsor -->
+    <section class="sponsor">
+        <div class="container">
+            <div id="sponsor" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <ul class="list-inline text-center">
+                                    <li><img class="" src="static/images/1.gif" /></li>
+                                    <li><img class="" src="static/images/2.png" /></li>
+                                    <li><img class="" src="static/images/3.png" /></li>
+                                    <li><img class="" src="static/images/4.png" /></li>
+                                    <li><img class="" src="static/images/5.png" /></li>
+                                    <li><img class="" src="static/images/6.png" /></li>
+                                    <li><img class="" src="static/images/7.png" /></li>
+                                    <li><img class="" src="static/images/8.png" /></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <ul class="list-inline text-center">
+                                    <li><img class="" src="static/images/1.gif" /></li>
+                                    <li><img class="" src="static/images/2.png" /></li>
+                                    <li><img class="" src="static/images/3.png" /></li>
+                                    <li><img class="" src="static/images/4.png" /></li>
+                                    <li><img class="" src="static/images/5.png" /></li>
+                                    <li><img class="" src="static/images/6.png" /></li>
+                                    <li><img class="" src="static/images/7.png" /></li>
+                                    <li><img class="" src="static/images/8.png" /></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="single-add">
-                        <h4>Best <span>Offer</span> for You</h4>
-                        <a href="#" class="btn btn-default" role="button">Learn More</a>
-                        <span class="img-add"><img src="images/red-tablet.png" alt="" /></span>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="single-add">
-                        <h4><span>Only</span> Best smartphone</h4>
-                        <a href="#" class="btn btn-default" role="button">Learn More</a>
-                        <span class="img-add"><img src="images/red-tablet.png" alt="" /></span>
-                    </div>
+                <!-- Controls -->
+                <a class="control-left" href="#sponsor" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                <a class="control-right" href="#sponsor" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- social icons -->
+    <section class="social-icons">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="list-inline text-center">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-spotify"></i></a></li>
+                        <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+                        <li><a href="#"><i class="fa fa-share-alt"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-delicious"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dropbox"></i></a></li>
+                        <li><a href="#"><i class="fa fa-soundcloud"></i></a></li>
+                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-github-alt"></i></a></li>
+                        <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                        <li><a href="#"><i class="fa fa-stumbleupon"></i></a></li>
+                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </section>	
-    
+    </section>
+
     <footer>
         <div class="footer-top">
             <div class="container">
@@ -171,7 +322,7 @@
                         <div class="heading-border b-color-1"></div>
                         <ul class="media-list">
                             <li class="media">
-                                <div class="media-left"><img src="images/featured-1.jpg" alt=""></div>
+                                <div class="media-left"><img src="static/images/featured-1.jpg" alt=""></div>
                                 <div class="media-body">
                                     <p class="media-heading">Lorem ipsum dolor sit amet</p>
                                     <div class="category">
@@ -185,7 +336,7 @@
                                 </div>
                             </li>
                             <li class="media">
-                                <div class="media-left"><img src="images/featured-1.jpg" alt=""></div>
+                                <div class="media-left"><img src="static/images/featured-1.jpg" alt=""></div>
                                 <div class="media-body">
                                     <p class="media-heading">Lorem ipsum dolor sit amet</p>
                                     <div class="category">
@@ -199,7 +350,7 @@
                                 </div>
                             </li>
                             <li class="media">
-                                <div class="media-left"><img src="images/featured-1.jpg" alt=""></div>
+                                <div class="media-left"><img src="static/images/featured-1.jpg" alt=""></div>
                                 <div class="media-body">
                                     <p class="media-heading">Lorem ipsum dolor sit amet</p>
                                     <div class="category">
@@ -220,7 +371,7 @@
                         <ul class="media-list">
                             <li class="media">
                                 <div class="media-left text-center">
-                                    <img src="images/featured-1.jpg" alt="">
+                                    <img src="static/images/featured-1.jpg" alt="">
                                     <span><i class="fa fa-search"></i></span>
                                 </div>
                                 <div class="media-body">
@@ -230,7 +381,7 @@
                             </li>
                             <li class="media">
                                 <div class="media-left text-center">
-                                    <img src="images/featured-1.jpg" alt="">
+                                    <img src="static/images/featured-1.jpg" alt="">
                                     <span><i class="fa fa-search"></i></span>
                                 </div>
                                 <div class="media-body">
@@ -240,7 +391,7 @@
                             </li>
                             <li class="media">
                                 <div class="media-left text-center">
-                                    <img src="images/featured-1.jpg" alt="">
+                                    <img src="static/images/featured-1.jpg" alt="">
                                     <span><i class="fa fa-search"></i></span>
                                 </div>
                                 <div class="media-body">
@@ -273,11 +424,11 @@
                     <div class="col-sm-12 text-center">
                         <p>Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
                         <ul class="list-inline center-block">
-                            <li><a href="#"><img src="images/card-1.png"></a></li>
-                            <li><a href="#"><img src="images/card-2.png"></a></li>
-                            <li><a href="#"><img src="images/card-3.png"></a></li>
-                            <li><a href="#"><img src="images/card-4.png"></a></li>
-                            <li><a href="#"><img src="images/card-5.png"></a></li>
+                            <li><a href="#"><img src="static/images/card-1.png"></a></li>
+                            <li><a href="#"><img src="static/images/card-2.png"></a></li>
+                            <li><a href="#"><img src="static/images/card-3.png"></a></li>
+                            <li><a href="#"><img src="static/images/card-4.png"></a></li>
+                            <li><a href="#"><img src="static/images/card-5.png"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -290,6 +441,6 @@
     <script src="static/js/jquery.cookie.js"></script>
     <script src="static/bootstrap/js/bootstrap.min.js"></script>
     <script src="static/js/common.js"></script>
-    <script src="static/js/index.js"></script>
+    <script src="static/js/list.js"></script>
 </body>
 </html>

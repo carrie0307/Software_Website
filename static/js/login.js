@@ -10,7 +10,9 @@
             alert('用户名或密码错误');
         }
         else {
-            location.href = '#'
+            $.cookie('account', dict['account']);
+            $.cookie('cartlen', 0);
+            window.location.go(-1);
         }
     });
     return false
@@ -37,7 +39,7 @@ function reg() {
             $.cookie('account', dict['account']);
             $.cookie('cartlen', 0);
 
-            location.href = '/'
+            window.location.go(-1);
         }
     });
     return false

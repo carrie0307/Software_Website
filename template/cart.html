@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<HEADER>
+	<title>Shopping Cart</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/jquery.cookie.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/js/common.js"></script>
+    <script type="text/javascript" src="static/js/etao.js"></script>
+    <script type="text/javascript" src="static/js/cart.js"></script>
+    <link href="static/css/cart.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</HEADER>
+<body class="container">
+	<div class="row hidden-print">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<ol class="breadcrumb">
+				<li><a href="/">首页</a></li>
+                <li class="active">查看购物车</li>
+			</ol>
+		</div>
+	</div>
+    <div class="cart-wrap">
+		<table id="cartTable" class="cart table table-condensed">
+			<thead>
+				<tr>
+					<th class="t-goods text-center"><label>商品名</label></th>
+                    <th class="t-goods text-center"><label>图片</label></th>
+					<th class="text-center"></th>
+					<th class="t-selling-price text-center"><label>单价</label></th>
+					<th class="t-qty text-center"><label>数量</label></th>
+					<th class="t-subtotal text-center"><label>金额小计</label></th>
+					<th class="t-action"><label>操作</label></th>
+				</tr>
+			</thead>
+			<tbody>
+				
+				
+				
+			</tbody>
+		</table>
+
+		<div class="row">
+			<div class="col-md-12 col-lg-12 col-sm-12">
+				<div class="cart-summary">
+					<div style="margin-left: 2rem;" class="pull-right">
+						<a onclick="gen_order()"
+							id="btn_settlement" type="button" class="btn btn-primary">去结算</a>
+					</div>
+					<div style="margin-left: 1rem; margin-top: 0.4rem;" class="pull-right total">
+						<label>金额合计:<span id="priceTotal" class="price-total large-bold-red">0.00</span></label>
+					</div>
+					<div style="margin-top: 4px;" class="pull-right">
+						<label>您选择了<span id="itemCount" class="large-bold-red" style="margin: 0 4px;"></span>种产品型号，共计<span id="qtyCount" class="large-bold-red" style="margin: 0 4px;"></span>件
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

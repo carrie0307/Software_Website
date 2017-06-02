@@ -27,14 +27,18 @@ class MainHandler(tornado.web.RequestHandler):
         # goods_dict_return = Base_SQL.Main_list()
         # self.write(goods_dict_return)
 
-
 # 根据商品类别查询所有同名的商品
 class ListHandler(tornado.web.RequestHandler):
     def get(self):
+        ttype=self.get_argument('type')
+        dict={'length':6,'data': { '1': ['AIPC笔记本电脑', 600, 75], '2': ['小米√3', 600, 75], '3': ['锁尼兰牙耳机', 600, 75], '4': ['基械键盘', 600, 75], '5': ['金是顿U盘', 600, 75], '6': ['平果MP3', 600, 75] }}
+
+        self.render('list.html',length=dict['length'], data=dict['data'])
+        '''
         ttype = self.get_argument('type')
-        goods_dict_return = Base_SQL.List_function(ttype)
-        self.render('list.html',length=goods_dict_return['length'], data=goods_dict_return['data'])
-        # self.write(goods_dict_return)
+        goods_dict_return = Base_SQL.Search_function(ttype)
+        self.write(goods_dict_return)
+        '''
 
 
 # 根据商品名查询所有同名的商品
@@ -45,14 +49,43 @@ class SearchHandler(tornado.web.RequestHandler):
         self.write(goods_dict_return)
 
 
-# 根据id 查询商品详情，存在返回details，否则返回{}
+class CartHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render('cart.html')
+
+    def post(self):
+        #前端发送订单信息。需要验证是否登录
+        #格式为{'商品id':数量}
+        self.write('1')
+
+class HomeHandler(tornado.web.RequestHandler):
+    def get(self):
+        #验证身份
+        account='江泽民'
+        addr='北京301医院'
+        tel='110'
+        length=3
+        data={'1111111111':{'uid':'1','id':1,'name':'乐死手机','num':5,'sum':5555,'time':'2017-05-05 23:59:59','statue':0},'1111111112':{'uid':'1','id':2,'name':'乐死炸弹','num':1,'sum':555,'time':'2017-05-05 23:59:59','statue':1},'1111111113':{'uid':'1','id':3,'name':'乐死挖掘机','num':2,'sum':66666,'time':'2017-05-05 23:59:59','statue':0}}
+        self.render('home.html',account=account,addr=addr,tel=tel,length=length,data=data)
+
+    def post(self):
+        #不支持
+        self.write('1')
+
+
+# 根据id 查询商品详情，存在返回detail，否则返回str(0)
 class DetailHandler(tornado.web.RequestHandler):
     def get(self):
         good_id = self.get_argument('id')
-        details = Base_SQL.Detail_functioni(good_id)
-        if details != {}:
-            price_now = int(details['price']*(100-details['discount'])/100)
-            self.render("product-detail.html",id=id,name=details['name'],price=details['price'],price_now=price_now,detail=details['detail'],tag=details['tag'])
+        #detail = Base_SQL.Detail_functioni(good_id)
+        id='2'
+        name='华萎手机'
+        detail='荣耀X1[2]  采用Kirin 910 1.6GHz四核处理器、2GB内存+16GB储存空间、7英寸1824x1200分辨率屏幕、1300万+前置500万像素摄像头、5000mAh容量电池；[3-4] '
+        price=666
+        off=75
+        tag='手机'
+        price_now=int(price*(100-off)/100)
+        self.render("product-detail.html",id=id,name=name,price=price,price_now=price_now,detail=detail,tag=tag)
 
 
 # 登录成功返回1,同时写cookie，登录失败返回0
@@ -60,11 +93,11 @@ class LoginHandler(tornado.web.RequestHandler):
     def post(self):
         account = self.get_argument('account')
         password = self.get_argument('password')
-        user_id = Base_SQL.Login_function(account, password)
-        if id == '000':
+        id = Base_SQL.Login_function(account, password)
+        if id == '0':
             self.write('0')
         else:
-            self.set_secure_cookie('user_id', user_id)
+            self.set_secure_cookie('user_id', id)
             self.write('1')
     def get(self):
         self.render('login.html')
@@ -76,92 +109,35 @@ class RegHandler(tornado.web.RequestHandler):
         password = self.get_argument('password')
         addr = self.get_argument('addr')
         tel = self.get_argument('tel')
-        user_id = Base_SQL.Reg_function(account, password, addr, tel)
-        if user_id == '000':
-            self.write('0')
-        else:
-            self.set_secure_cookie('user_id', user_id)
-            self.write('1')
+        print password
     def get(self):
         self.render('login.html')
-
-
-class CartHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.render('cart.html')
-    def post(self):
-        #前端发送订单信息。需要验证是否登录
-        #格式为{'商品id':数量}
-        self.write('1')
-
-
-class HomeHandler(tornado.web.RequestHandler):
-    def get(self):
-        #验证身份
-        user_id = get_secure_cookie('user_id')
-        user_dict = Base_SQL.Home_Userinfo_function(user_id)
-        order_dict = Home_Orderinfo_function(user_id)
-        self.render('home.html',account=user_dict['account'],addr=user_dict['addr'],tel=user_dict['tel'],length=order_dict['length'],data=order_dict['data'])
-    def post(self):
-        #不支持
-        self.write('1')
-
-
-class PurchaseHandler(tornado.web.RequestHandler):
-    def post(self):
-         pass
-         # 下订单;statue的状态是针对具体某个商品还是全部？
-
-
-# 确认支付,根据uuid即order_id
-class PurchaseCtrlHandler(tornado.web.RequestHandler):
-    def post(self):
-         order_id = self.get_argument('uuid')
-         Base_SQL.Purchase_Ctrl_function(order_id)
-
-
-class OrderHandler(tornado.web.RequestHandler):
-    def get(self):
-         user_id = self.set_secure_cookie('user_id')
-         order_dict_return = Base_SQL.Order_function(user_id)
-         self.write(order_dict_return)
-
-
 
 class AdminHandler(tornado.web.RequestHandler):
     def post(self):
         type=self.get_argument('type')
         id=self.get_argument('id')
-        # 这个id在相应情况下是用户号和订单号
         if type=='deluser':
-            Base_SQL.Admin_Del_User_function(id)
+            pass#删除用户
         elif type=='delorder':
-            # 删除订单;result为1,修改成功;为0,则修改失败,result为int
-            Base_SQL.Admin_Del_Order_function(order_id)
+            pass#删除订单
         elif type=='changeprice':
-            # 修改商品价格;result为1,修改成功;为0,则修改失败,result为int
             price=self.get_argument('price')
-            result = Base_SQL.Admin_Modify_Price_function(id, price)
+            pass#改价格
         elif type=='changeoff':
-            # 修改商品折扣;result为1,修改成功;为0,则修改失败,result为int
             off=self.get_argument('off')
-            result = Base_SQL.Admin_Modify_Discount_function(id, off)
+            pass#改折扣
     def get(self):
         #验证身份
         #判断请求类型
         try:
             type=self.get_argument('type')
             if type == 'order':
-                # 管理员查看所有订单
-                Orders = Base_SQL.Admin_Order_function()
-                self.write(Orders)
+                self.write({'length':3,'data':{'1111111111':{'uid':'1','id':1,'name':'乐死手机','num':5,'sum':5555,'time':'2017-05-05 23:59:59','statue':0},'1111111112':{'uid':'1','id':2,'name':'乐死炸弹','num':1,'sum':555,'time':'2017-05-05 23:59:59','statue':1},'1111111113':{'uid':'1','id':3,'name':'乐死挖掘机','num':2,'sum':66666,'time':'2017-05-05 23:59:59','statue':0}}})
             elif type == 'user':
-                # 管理员查看所有用户
-                All_users = Base_SQL.Admin_Allusers_function()
-                self.write(All_users)
+                self.write({'length':3,'data':{'1':{'account':'乐','addr':'hit','tel':'110'},'2':{'account':'乐2','addr':'hit','tel':'110'},'3':{'account':'乐3','addr':'hit','tel':'110'}}})
             elif type == 'goods':
-                # 管理员查看所有商品
-                All_goods = Base_SQL.Admin_AllGoods_function()
+                self.write({'length':3,'data':{'1':{'name':'乐死手机','type':'手机','price':5555,'off':75},'2':{'name':'乐死手机','type':'手机','price':5555,'off':75},'3':{'name':'乐死手机','type':'手机','price':5555,'off':75}}})
         except:
             self.render('admin.html')
 

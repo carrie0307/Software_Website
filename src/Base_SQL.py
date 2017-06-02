@@ -81,13 +81,20 @@ def Search_function(item):
 
 # 根据id返回表中的detail字段 ,  如果不存在此id，返回0
 def Detail_functioni(id):
-    sqlstr = "SELECT detail FROM  goods_table WHERE id = %s" %id
+    id = int(id)
+    details = {}
+    sqlstr = "SELECT name, detail, price, discount, kind FROM  goods_table WHERE id = %s" %id
     count = int(cur.execute(sqlstr))
-    if count == 0:
-        detail = '0'
-    else:
-        detail = str(cur.fetchone()[0])
-    return detail
+    if count != 0:
+        result = cur.fetchone()
+        # print result
+        details['name'] = str(result[0])
+        details['detail'] = str(result[1])
+        details['price'] = int(result[2])
+        details['discount'] = int(result[3])
+        details['tag'] = str(result[4])
+    print details
+    return details
 
 
 # 登录成功返回用户id，失败返回0
@@ -152,8 +159,36 @@ def Reg_function(account, passwd, addr ,tel):
             return return_dict
 
 
-def Purchase_function(data):
-    data = [{'001':3},{'002':5}]
+# 生成订单，成功返回int 1， 失败返回 int 2
+def Purchase_function(good_id, num, user_id):
+    try:
+         sqlstr = "SELECT id,name, price,discount FROM goods_table WHERE id = '%s'" %good_id
+         cur.execute(sqlstr)
+         result = cur.fetchone()
+         price = int(result[2])
+         sum = price * num
+         now_time = time.strftime('%Y-%m-%d-%H:%M',time.localtime(time.time()))
+         sqlstr = "INSERT INTO order_table(user_id, good_id, goods_name, goods_num, sum, deal_time) VALUES('%s', %s, '%s', %s, %s, '%s')" %(user_id, good_id, str(result[1]), num, sum, now_time)
+         cur.execute(sqlstr)
+         conn.commit()
+         print "Order ok ..."
+         return 1
+    except:
+        return 0
+
+
+# 确认支付
+def Purchase_Ctrl_function(order_id):
+    try:
+        sqlstr = "UPDATE order_table SET pay = 1 WHERE id = %s" %int(order_id)   
+        cur.execute(sqlstr)
+        conn.commit()
+        print 'result : 1'
+        return 1
+    except:
+        print 'result : 0'
+        return 0
+    
 
 
 def Order_function(user_id):
@@ -186,12 +221,12 @@ def Admin_Order_function():
     count = cur.execute(sqlstr)
     result = cur.fetchall()
     for item in result:
-        order_dict['user_id'] = str(item[1])
-        order_dict['goods_name'] = str(item[2])
-        order_dict['goods_num'] = int(item[3])
+        order_dict['uid'] = str(item[1])
+        order_dict['name'] = str(item[2])
+        order_dict['num'] = int(item[3])
         order_dict['sum']= int(item[4])
-        order_dict['deal_time'] = str(item[5])
-        order_dict['pay'] = int(item[6])
+        order_dict['time'] = str(item[5])
+        order_dict['statue'] = int(item[6])
         order_id = "%03d"%int(item[0])
         data_dict[order_id] = order_dict
         order_dict = {}
@@ -204,12 +239,38 @@ def Admin_Order_function():
 def Admin_Allusers_function():
     return_dict = {}
     data_dict = {}
+    user_dict = {}
     sqlstr = "SELECT id, account, password, addr, tel FROM user_table  ORDER BY id"
     count = cur.execute(sqlstr)
     result = cur.fetchall()
     for item in result:
         user_id = "%03d"%int(item[0])
-        data_dict[user_id] = [str(item[1]), str(item[2]), str(item[3]), str(item[4])]
+        user_dict['account'] = str(item[1])
+        user_dict['addr'] = str(item[3])
+        user_dict['tel'] = str(item[4])
+        data_dict[user_id] = user_dict
+        user_dict = {}
+    return_dict['length'] = int(count)
+    return_dict['data'] = data_dict
+    print return_dict
+    return return_dict
+
+
+def Admin_AllGoods_function():
+    return_dict = {}
+    data_dict = {}
+    good_dict = {}
+    sqlstr = "SELECT id, name, kind, price, discount  FROM goods_table  ORDER BY id"
+    count = cur.execute(sqlstr)
+    result = cur.fetchall()
+    for item in result:
+        good_id = "%03d"%int(item[0])
+        good_dict['name'] = str(item[1])
+        good_dict['type'] = str(item[2])
+        good_dict['price'] = int(item[3])
+        good_dict['off'] = int(item[4])
+        data_dict[good_id] = good_dict
+        good_dict = {}
     return_dict['length'] = int(count)
     return_dict['data'] = data_dict
     print return_dict
@@ -224,7 +285,7 @@ def  Admin_Modify_Price_function(good_id, price):
         print 'result : 1'
         return 1
     except:
-        print 'result : 2'
+        print 'result : 0'
         return 0
 
 
@@ -237,7 +298,7 @@ def Admin_Modify_Discount_function(good_id, re_discount):
         print 'result : 1'
         return 1
     except:
-        print 'result : 2'
+        print 'result : 0'
         return 0
 
 
@@ -250,7 +311,7 @@ def Admin_Del_Order_function(order_id):
         print 'result : 1'
         return 1
     except:
-        print 'result : 2'
+        print 'result : 0'
         return 0
 
 
@@ -263,8 +324,47 @@ def Admin_Del_User_function(user_id):
         print 'result : 1'
         return 1
     except:
-        print 'result : 2'
+        print 'result : 0'
         return 0
+
+
+
+def Home_Userinfo_function(user_id):
+    user_id = int(user_id)
+    user_dict = {}
+    sqlstr = "SELECT account, addr, tel FROM user_table  WHERE id = %s" %user_id
+    cur.execute(sqlstr)
+    user_info = cur.fetchone()
+    user_dict['account'] = str(user_info[0])
+    user_dict['addr'] = str(user_info[1])
+    user_dict['tel'] = str(user_info[2])
+    return user_dict
+
+
+def Home_Orderinfo_function(user_id):
+    user_id = int(user_id)
+    order_dict = {}
+    data_dict = {}
+    return_dict = {}
+    sqlstr = "SELECT id, user_id, good_id, goods_name, goods_num,  sum, deal_time, pay FROM order_table  WHERE user_id = %s" %user_id
+    count = cur.execute(sqlstr)
+    result = cur.fetchall()
+    for item in result:
+        order_dict['uid'] = str(item[1])
+        order_dict['id'] = "%03d"%int(item[2])
+        order_dict['name'] = str(item[3])
+        order_dict['num'] = str(item[4])
+        order_dict['sum'] = int(item[5])
+        order_dict['deal_time'] = str(item[6])
+        order_dict['statue'] = int(item[7])
+        data_dict["%03d"%int(item[0])] = order_dict
+        order_dict = {}
+    return_dict['length'] = int(count)
+    return_dict['data'] = data_dict
+    print return_dict
+    return return_dict
+
+
 
 
 
@@ -282,13 +382,19 @@ def Admin_Del_User_function(user_id):
 if __name__ == '__main__':
     # Main_list()
    #  Login_function('123', 'abc123')
+   # List_function('A')
     # Detail_functioni('001')
     # Reg_function('795', 'abc123', 'HIT' ,'18963166073')
    #  Search_function('computer')
   #  Order_function('002')
   # Admin_Order_function()
- #  Admin_Allusers_function()
+ # Admin_Allusers_function()
  # Admin_Modify_Price_function(1, 50)
  # Admin_Modify_Discount_function(2, 9)
  # Admin_Del_Order_function('003')
- Admin_Del_User_function('013')
+ # Admin_Del_User_function('013')
+ # Purchase_Ctrl_function('001')
+ # Admin_AllGoods_function()
+ # Home_function('012')
+ # Home_Orderinfo_function(2)
+ Purchase_function(2, 3, '002')
